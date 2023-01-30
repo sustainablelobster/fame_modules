@@ -1,0 +1,45 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">ssdeep</h4>
+            <p class="category">Detailed Results</p>
+        </div>
+
+        <div class="content">
+            <p>{{results.hash}}</p>
+            <table class="table">
+                <caption>Matches</caption>
+                <thead>
+                    <tr>
+                        <th>Name(s)</th>
+                        <th>Score</th>
+                        <th>MD5</th>
+                        <th>SHA1</th>
+                        <th>SHA256</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if results.matches|length > 0 %}
+                        {% for match in results.matches %}
+                            <tr>
+                                <td><a href="/files/{{match.file._id}}">{{match.file.names|join(", ")}}</a></td>
+                                <td>{{match.score}}</td>
+                                <td>{{match.file.md5}}</td>
+                                <td>{{match.file.sha1}}</td>
+                                <td>{{match.file.sha256}}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>None</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
